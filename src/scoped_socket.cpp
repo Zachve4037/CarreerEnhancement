@@ -2,12 +2,12 @@
 // Created by zachvem on 12-Aug-26.
 //
 
-#include "ScopedSocket.h"
+#include "scoped_socket.h"
 
 #include <system_error>
 #include <winsock2.h>
 
-ScopedSocket::ScopedSocket(int protocol) {
+scoped_socket::scoped_socket(int protocol) {
   this->fd_ = socket(AF_INET, SOCK_STREAM, protocol);
   if (this->fd_ == -1) {
     throw std::system_error(
@@ -17,17 +17,17 @@ ScopedSocket::ScopedSocket(int protocol) {
   }
 }
 
-ScopedSocket::~ScopedSocket() {
+scoped_socket::~scoped_socket() {
   if (this->fd_ != -1) {
     ::closesocket(this->fd_);
   }
 }
 
-ScopedSocket::ScopedSocket(ScopedSocket &&other) noexcept : fd_(other.fd_) {
+scoped_socket::scoped_socket(scoped_socket &&other) noexcept : fd_(other.fd_) {
   other.fd_ = -1;
 }
 
-ScopedSocket &ScopedSocket::operator=(ScopedSocket &&other) noexcept {
+scoped_socket &scoped_socket::operator=(scoped_socket &&other) noexcept {
   if (this != &other) {
     if (this->fd_ != -1) {
       ::closesocket(this->fd_);
@@ -38,6 +38,6 @@ ScopedSocket &ScopedSocket::operator=(ScopedSocket &&other) noexcept {
   return *this;
 }
 
-int ScopedSocket::get() const noexcept {
+int scoped_socket::get() const noexcept {
   return this->fd_;
 }

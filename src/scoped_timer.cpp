@@ -2,7 +2,7 @@
 // Created by zachvem on 12-Aug-26.
 //
 
-#include "ScopedTimer.h"
+#include "scoped_timer.h"
 
 #include <pthread_time.h>
 #include <system_error>

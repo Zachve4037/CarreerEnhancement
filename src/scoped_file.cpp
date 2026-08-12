@@ -2,14 +2,14 @@
 // Created by zachvem on 12-Aug-26.
 //
 
-#include "ScopedFile.h"
+#include "scoped_file.h"
 
-#include <fcntl.h>
-#include <unistd.h>
-#include <system_error>
 #include <cerrno>
+#include <fcntl.h>
+#include <system_error>
+#include <unistd.h>
 
-ScopedFile::ScopedFile(const char *path) {
+scoped_file::scoped_file(const char *path) {
   this->fd_ = ::open(path, O_RDONLY);
   if (this->fd_ == -1) {
     throw std::system_error(
@@ -19,17 +19,17 @@ ScopedFile::ScopedFile(const char *path) {
   }
 }
 
-ScopedFile::~ScopedFile() {
+scoped_file::~scoped_file() {
   if (this->fd_ != -1) {
     ::close(fd_);
   }
 }
 
-ScopedFile::ScopedFile(ScopedFile&& other) noexcept : fd_(other.fd_) {
+scoped_file::scoped_file(scoped_file&& other) noexcept : fd_(other.fd_) {
   other.fd_ = -1;
 }
 
-ScopedFile& ScopedFile::operator=(ScopedFile&& other) noexcept {
+scoped_file& scoped_file::operator=(scoped_file&& other) noexcept {
   if (this != &other) {
     if (this->fd_ != -1) {
       ::close(this->fd_);
@@ -40,6 +40,6 @@ ScopedFile& ScopedFile::operator=(ScopedFile&& other) noexcept {
   return *this;
 };
 
-int ScopedFile::get() const noexcept {
+int scoped_file::get() const noexcept {
   return this->fd_;
 }
