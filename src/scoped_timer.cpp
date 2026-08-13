@@ -4,13 +4,14 @@
 
 #include "scoped_timer.h"
 
-#include <pthread_time.h>
+#include <unistd.h>
+#include <cerrno>
 #include <system_error>
-// #include <timerfd.h>
+// #include <sys/timerfd.h>
 // ///for the record I am currently on windows so I don't really know if this would be good implementation
-// ScopedTimer::ScopedTimer(const int *ptr)
+// ScopedTimer::ScopedTimer()
 // {
-//   this->fd_ = timerfd_create(CLOCK_REALTIME, 0);
+//   this->fd_ = ::timerfd_create(CLOCK_MONOTONIC, 0);
 //   if (this->fd_ == -1) {
 //     throw std::system_error(
 //       errno,
@@ -21,7 +22,7 @@
 //
 // ScopedTimer::~ScopedTimer() {
 //   if (this->fd_ != -1) {
-//     this->fd_.close();
+//     ::close(fd_);
 //   }
 // }
 //
@@ -32,7 +33,7 @@
 // ScopedTimer &ScopedTimer::operator=(ScopedTimer &&other) noexcept {
 //   if (this != &other) {
 //     if (this->fd_ != -1) {
-//       this->fd_close();
+//       ::close(fd_);
 //     }
 //     this->fd_ = other.fd_;
 //     other.fd_ = -1;

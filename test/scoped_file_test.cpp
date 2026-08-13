@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/ScopedFile.h"
+#include "../src/scoped_file.h"
 
 TEST(ScopedFile, FailedConstruction) {
   EXPECT_THROW(scoped_file file("this-is-non-existent"), std::system_error);

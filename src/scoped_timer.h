@@ -7,7 +7,7 @@
 
 class scoped_timer {
 public:
-  explicit scoped_timer(const int* ptr);
+  explicit scoped_timer();
   ~scoped_timer();
 
   scoped_timer(const scoped_timer&) = delete;
