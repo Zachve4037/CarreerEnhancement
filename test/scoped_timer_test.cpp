@@ -1,7 +1,8 @@
 // #include "gtest/gtest.h"
 // #include "../src/scoped_timer.h"
 //
-// // I am running windows so for this case i am not making tests
+// ///for the record I am currently on windows so that's why it is commented out
+// ///i have installed wsl and compiled and tested it there
 //
 // TEST(ScopedTimerTest, CreatesTimer) {
 //     scoped_timer timer;

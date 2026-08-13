@@ -9,7 +9,8 @@
 // #include <sys/timerfd.h>
 // #include <system_error>
 // #include <unistd.h>
-// ///for the record I am currently on windows so I don't really know if this would be good implementation
+// ///for the record I am currently on windows so that's why it is commented out
+// ///i have installed wsl and compiled and tested it there
 // scoped_timer::scoped_timer()
 // {
 //   this->fd_ = ::timerfd_create(CLOCK_MONOTONIC, 0);

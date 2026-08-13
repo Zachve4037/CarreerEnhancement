@@ -1,6 +1,8 @@
 // //
 // // Created by zachvem on 12-Aug-26.
 // //
+// ///for the record I am currently on windows so that's why it is commented out
+// ///i have installed wsl and compiled and tested it there
 //
 // #ifndef CPPFIRST_SCOPEDSOCKET_H
 // #define CPPFIRST_SCOPEDSOCKET_H
