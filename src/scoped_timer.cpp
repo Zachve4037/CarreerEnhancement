@@ -1,15 +1,16 @@
+// //
+// // Created by zachvem on 12-Aug-26.
+// //
 //
-// Created by zachvem on 12-Aug-26.
+// #include "scoped_timer.h"
 //
-
-#include "scoped_timer.h"
-
-#include <unistd.h>
-#include <cerrno>
-#include <system_error>
+// #include <cerrno>
+// #include <pthread_time.h>
 // #include <sys/timerfd.h>
+// #include <system_error>
+// #include <unistd.h>
 // ///for the record I am currently on windows so I don't really know if this would be good implementation
-// ScopedTimer::ScopedTimer()
+// scoped_timer::scoped_timer()
 // {
 //   this->fd_ = ::timerfd_create(CLOCK_MONOTONIC, 0);
 //   if (this->fd_ == -1) {
@@ -20,17 +21,17 @@
 //   }
 // }
 //
-// ScopedTimer::~ScopedTimer() {
+// scoped_timer::~scoped_timer() {
 //   if (this->fd_ != -1) {
 //     ::close(fd_);
 //   }
 // }
 //
-// ScopedTimer::ScopedTimer(ScopedTimer &&other) noexcept : fd_(other.fd_) {
+// scoped_timer::scoped_timer(scoped_timer &&other) noexcept : fd_(other.fd_) {
 //   other.fd_ = -1;
 // }
 //
-// ScopedTimer &ScopedTimer::operator=(ScopedTimer &&other) noexcept {
+// scoped_timer &scoped_timer::operator=(scoped_timer &&other) noexcept {
 //   if (this != &other) {
 //     if (this->fd_ != -1) {
 //       ::close(fd_);
@@ -41,6 +42,6 @@
 //   return *this;
 // }
 //
-// int ScopedTimer::get() const noexcept {
+// int scoped_timer::get() const noexcept {
 //   return this->fd_;
 // }
