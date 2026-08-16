@@ -7,5 +7,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 enable_testing()
 
+add_compile_options(
+        -fsanitize=address,undefined
+        -fno-omit-frame-pointer
+)
+
+add_link_options(
+        -fsanitize=address,undefined
+)
+
 add_subdirectory(src)
 add_subdirectory(test)
