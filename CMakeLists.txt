@@ -7,14 +7,18 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 enable_testing()
 
-add_compile_options(
-        -fsanitize=address,undefined
-        -fno-omit-frame-pointer
-)
+option(ENABLE_SANITIZERS "Enable AddressSanitizer and UBSan" OFF)
 
-add_link_options(
-        -fsanitize=address,undefined
-)
+if(ENABLE_SANITIZERS)
+    add_compile_options(
+            -fsanitize=address,undefined
+            -fno-omit-frame-pointer
+    )
+
+    add_link_options(
+            -fsanitize=address,undefined
+    )
+endif()
 
 add_subdirectory(src)
 add_subdirectory(test)
