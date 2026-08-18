@@ -7,6 +7,8 @@ add_library(core
         scoped_timer.h
         scoped_socket.cpp
         scoped_socket.h
+        binary_search.cpp
+        binary_search.h
 )
 
 add_executable(cppfirst

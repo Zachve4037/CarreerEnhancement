@@ -13,6 +13,7 @@ add_executable(runUnitTests
         scoped_file_test.cpp
         scoped_timer_test.cpp
         scoped_socket_test.cpp
+        binary_search_test.cpp
 )
 
 target_link_libraries(runUnitTests
