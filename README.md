@@ -35,3 +35,4 @@ and CI on github
 * scoped_file, scoped_socket, scoped_timer -> looked upon RAII, ownership and move semantic. Basically these 
 implementations are just small wrappers around them using RAII.
 * binary_search -> implementation of binary search tree with emphasis on the invariants
+* byte_buffer -> implementation of byte_buffer with copy and move semantics along with tests of the implementation

@@ -9,6 +9,8 @@ add_library(core
         scoped_socket.h
         binary_search.cpp
         binary_search.h
+        byte_buffer.cpp
+        byte_buffer.h
 )
 
 add_executable(cppfirst
