@@ -2,7 +2,7 @@
 // Created by zachvem on 12-Aug-26.
 //
 
-#include "scoped_file.h"
+#include "../scoped_file.h"
 
 #include <cerrno>
 #include <fcntl.h>

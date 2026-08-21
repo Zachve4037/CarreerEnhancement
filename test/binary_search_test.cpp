@@ -1,8 +1,8 @@
 //
 // Created by zachvem on 18-Aug-26.
 //
+#include "../src/3_weekBinarySearch/binary_search.h"
 #include <gtest/gtest.h>
-#include "../src/binary_search.h"
 
 TEST(BinarySearchTest, Empty) {
   std::span<int> s = std::span<int>{};

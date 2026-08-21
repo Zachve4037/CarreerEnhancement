@@ -1,11 +1,9 @@
-//
-// Created by zachvem on 20-Aug-26.
-//
-
 #include <benchmark/benchmark.h>
-#include "../src/byte_buffer.h"
 
-static void BM_ByteBufferCopy(benchmark::State& state) {
+#include "../src/3_weekByteBuffer/byte_buffer.h"
+
+static void BM_ByteBufferCopy(benchmark::State& state)
+{
   byte_buffer source(state.range(0));
 
   for (auto _ : state) {
@@ -16,9 +14,11 @@ static void BM_ByteBufferCopy(benchmark::State& state) {
 }
 
 BENCHMARK(BM_ByteBufferCopy)
+    ->Arg(64)
     ->Arg(1024)
     ->Arg(1024 * 1024)
     ->Arg(10 * 1024 * 1024);
+
 
 static void BM_ByteBufferMove(benchmark::State& state)
 {
@@ -34,6 +34,7 @@ static void BM_ByteBufferMove(benchmark::State& state)
 }
 
 BENCHMARK(BM_ByteBufferMove)
+    ->Arg(64)
     ->Arg(1024)
     ->Arg(1024 * 1024)
     ->Arg(10 * 1024 * 1024);

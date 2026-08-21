@@ -2,7 +2,7 @@
 // Created by zachvem on 20-Aug-26.
 //
 
-#include "byte_buffer.h"
+#include "../byte_buffer.h"
 
 byte_buffer::byte_buffer(std::size_t size)
     : data_(size == 0 ? nullptr : new std::byte[size]), size_(size) {}

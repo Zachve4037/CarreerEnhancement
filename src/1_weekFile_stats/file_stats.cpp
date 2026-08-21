@@ -2,10 +2,10 @@
 // Created by zachvem on 09-Aug-26.
 //
 
-#include "file_stats.h"
+#include "../file_stats.h"
 
-#include <sstream>
 #include <fstream>
+#include <sstream>
 
 FileStats analyzeFile(const std::string& path) {
   std::ifstream input_stream(path);

@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../src/file_stats.h"
+#include "../src/1_weekFile_stats/file_stats.h"
 
 TEST(FileStatsTest, EmptyFile) {
   auto stats = analyzeFile("../../test/data/empty.txt");

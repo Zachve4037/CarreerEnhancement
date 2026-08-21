@@ -1,16 +1,16 @@
 add_library(core
-        file_stats.cpp
-        file_stats.h
-        scoped_file.cpp
-        scoped_file.h
-        scoped_timer.cpp
-        scoped_timer.h
-        scoped_socket.cpp
-        scoped_socket.h
-        binary_search.cpp
-        binary_search.h
-        byte_buffer.cpp
-        byte_buffer.h
+        1_weekFile_stats/file_stats.cpp
+        1_weekFile_stats/file_stats.h
+        2_weekScopedObjects/scoped_file.cpp
+        2_weekScopedObjects/scoped_file.h
+        2_weekScopedObjects/scoped_timer.cpp
+        2_weekScopedObjects/scoped_timer.h
+        2_weekScopedObjects/scoped_socket.cpp
+        2_weekScopedObjects/scoped_socket.h
+        3_weekBinarySearch/binary_search.cpp
+        3_weekBinarySearch/binary_search.h
+        3_weekByteBuffer/byte_buffer.cpp
+        3_weekByteBuffer/byte_buffer.h
 )
 
 add_executable(cppfirst
