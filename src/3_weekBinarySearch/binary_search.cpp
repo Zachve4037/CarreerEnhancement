@@ -1,7 +1,9 @@
 //
 // Created by zachvem on 18-Aug-26.
 //
-#include "../binary_search.h"
+#include "binary_search.h"
+
+#include <span>
 
 std::optional<int> binary_search(std::span<int> &list, int target) {
   int left = 0;

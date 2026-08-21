@@ -2,7 +2,7 @@
 // Created by zachvem on 09-Aug-26.
 //
 
-#include "../file_stats.h"
+#include "file_stats.h"
 
 #include <fstream>
 #include <sstream>
