@@ -15,6 +15,7 @@ add_executable(runUnitTests
         scoped_socket_test.cpp
         binary_search_test.cpp
         byte_buffer_test.cpp
+        process_supervisor_test.cpp
 )
 
 target_link_libraries(runUnitTests

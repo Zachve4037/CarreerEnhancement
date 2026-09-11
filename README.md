@@ -36,3 +36,4 @@ and CI on github
 implementations are just small wrappers around them using RAII.
 * binary_search -> implementation of binary search tree with emphasis on the invariants
 * byte_buffer -> implementation of byte_buffer with copy and move semantics along with tests of the implementation
+* process_supervisor -> implementation of process supervisor

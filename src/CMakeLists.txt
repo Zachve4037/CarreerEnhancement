@@ -11,6 +11,8 @@ add_library(core
         3_weekBinarySearch/binary_search.h
         3_weekByteBuffer/byte_buffer.cpp
         3_weekByteBuffer/byte_buffer.h
+        6_week_process_supervisor/process_supervisor.cpp
+        6_week_process_supervisor/process_supervisor.h
 )
 
 add_executable(cppfirst
