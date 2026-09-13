@@ -13,7 +13,6 @@ add_library(core
         3_weekByteBuffer/byte_buffer.h
         6_week_process_supervisor/process_supervisor.cpp
         6_week_process_supervisor/process_supervisor.h
-        6_week_process_supervisor/process_supervisor_demo.cpp
 )
 
 add_executable(cppfirst
@@ -21,6 +20,15 @@ add_executable(cppfirst
 )
 
 target_link_libraries(cppfirst
+        PRIVATE
+        core
+)
+
+add_executable(process_supervisor_demo
+        6_week_process_supervisor/process_supervisor_demo.cpp
+)
+
+target_link_libraries(process_supervisor_demo
         PRIVATE
         core
 )
