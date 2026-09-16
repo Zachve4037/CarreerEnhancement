@@ -16,6 +16,8 @@ add_executable(runUnitTests
         binary_search_test.cpp
         byte_buffer_test.cpp
         process_supervisor_test.cpp
+        frame_test.cpp
+        tcp_server_test.cpp
 )
 
 target_link_libraries(runUnitTests

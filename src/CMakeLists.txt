@@ -13,6 +13,14 @@ add_library(core
         3_weekByteBuffer/byte_buffer.h
         6_week_process_supervisor/process_supervisor.cpp
         6_week_process_supervisor/process_supervisor.h
+        7_week_networking_and_protocol_framing/frame.cpp
+        7_week_networking_and_protocol_framing/frame.h
+        7_week_networking_and_protocol_framing/tcp_server.cpp
+        7_week_networking_and_protocol_framing/tcp_server.h
+        7_week_networking_and_protocol_framing/tcp_client.cpp
+        7_week_networking_and_protocol_framing/tcp_client.h
+        7_week_networking_and_protocol_framing/socket_utils.cpp
+        7_week_networking_and_protocol_framing/socket_utils.h
 )
 
 add_executable(cppfirst
