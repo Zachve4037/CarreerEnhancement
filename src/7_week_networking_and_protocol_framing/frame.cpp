@@ -3,11 +3,13 @@
 //
 
 #include "frame.h"
-frame::frame(uint32_t length)
-  : length_(length >= 0 ? length : 0), payload_{new std::byte[length_]} {
-}
-
-frame::~frame() {
-  *payload_ = nullptr;
-  delete* payload_;
-}
+//send - determine payload size, create a 4 byte length header
+// send the header
+// send the payload
+// handle partial send() calls
+//receive - read exactly 4 bytes
+// interpret them as the payload length
+// check that lenght does not exceed MAX
+// allocate a string of that size
+// read exactly that many bytes
+// return the resulting string

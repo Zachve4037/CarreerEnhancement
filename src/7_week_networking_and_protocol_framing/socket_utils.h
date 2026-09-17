@@ -8,8 +8,7 @@
 #include <cstdint>
 #include <string>
 
-class socket_utils {
-public:
+namespace socket_utils {
   void send_all(int socket_fd, const void* data, std::size_t size);
   void receive_all(int socket_fd, void* data, std::size_t size);
   int create_server_socket(std::uint16_t port);

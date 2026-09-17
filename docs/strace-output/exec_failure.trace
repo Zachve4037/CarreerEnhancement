@@ -1,0 +1,130 @@
+3332  20:07:50.353280 execve("build/src/process_supervisor_demo", ["build/src/process_supervisor_dem"..., "definitely-not-a-real-program-xy"...], 0x7fff64cdc9b0 /* 33 vars */) = 0 <0.001273>
+3332  20:07:50.354812 brk(NULL)         = 0x589fcf419000 <0.000021>
+3332  20:07:50.355019 arch_prctl(0x3001 /* ARCH_??? */, 0x7ffd24eb3fa0) = -1 EINVAL (Invalid argument) <0.000020>
+3332  20:07:50.355304 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x75c681f08000 <0.000025>
+3332  20:07:50.355485 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory) <0.000024>
+3332  20:07:50.356878 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3 <0.000025>
+3332  20:07:50.357065 newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=21696, ...}, AT_EMPTY_PATH) = 0 <0.000025>
+3332  20:07:50.357396 mmap(NULL, 21696, PROT_READ, MAP_PRIVATE, 3, 0) = 0x75c681f02000 <0.000067>
+3332  20:07:50.358011 close(3)          = 0 <0.000114>
+3332  20:07:50.358614 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 3 <0.000032>
+3332  20:07:50.358865 read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832 <0.000032>
+3332  20:07:50.359141 newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=2260296, ...}, AT_EMPTY_PATH) = 0 <0.000022>
+3332  20:07:50.359336 mmap(NULL, 2275520, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x75c681c00000 <0.000031>
+3332  20:07:50.359565 mprotect(0x75c681c9a000, 1576960, PROT_NONE) = 0 <0.000033>
+3332  20:07:50.359781 mmap(0x75c681c9a000, 1118208, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x9a000) = 0x75c681c9a000 <0.000028>
+3332  20:07:50.359979 mmap(0x75c681dab000, 454656, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1ab000) = 0x75c681dab000 <0.000032>
+3332  20:07:50.360197 mmap(0x75c681e1b000, 57344, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x21a000) = 0x75c681e1b000 <0.000028>
+3332  20:07:50.360385 mmap(0x75c681e29000, 10432, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x75c681e29000 <0.000023>
+3332  20:07:50.360556 close(3)          = 0 <0.000023>
+3332  20:07:50.360720 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3 <0.000030>
+3332  20:07:50.360894 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832 <0.000023>
+3332  20:07:50.361081 newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=125488, ...}, AT_EMPTY_PATH) = 0 <0.000022>
+3332  20:07:50.361261 mmap(NULL, 127720, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x75c681ee2000 <0.000031>
+3332  20:07:50.361434 mmap(0x75c681ee5000, 94208, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3000) = 0x75c681ee5000 <0.000030>
+3332  20:07:50.361606 mmap(0x75c681efc000, 16384, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1a000) = 0x75c681efc000 <0.000027>
+3332  20:07:50.361765 mmap(0x75c681f00000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1d000) = 0x75c681f00000 <0.000033>
+3332  20:07:50.362014 close(3)          = 0 <0.000022>
+3332  20:07:50.362180 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3 <0.000026>
+3332  20:07:50.362349 read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\237\2\0\0\0\0\0"..., 832) = 832 <0.000024>
+3332  20:07:50.362521 pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784 <0.000022>
+3332  20:07:50.362682 pread64(3, "\4\0\0\0 \0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0"..., 48, 848) = 48 <0.000022>
+3332  20:07:50.362831 pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0jl\265\250\17\325\345\273[\363\256\252\21\32\335\230"..., 68, 896) = 68 <0.000023>
+3332  20:07:50.362987 newfstatat(3, "", {st_mode=S_IFREG|0755, st_size=2220400, ...}, AT_EMPTY_PATH) = 0 <0.000022>
+3332  20:07:50.363154 pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784 <0.000023>
+3332  20:07:50.363327 mmap(NULL, 2264656, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x75c681800000 <0.000027>
+3332  20:07:50.363495 mprotect(0x75c681828000, 2023424, PROT_NONE) = 0 <0.000027>
+3332  20:07:50.363692 mmap(0x75c681828000, 1658880, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x75c681828000 <0.000029>
+3332  20:07:50.363860 mmap(0x75c6819bd000, 360448, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1bd000) = 0x75c6819bd000 <0.000023>
+3332  20:07:50.364018 mmap(0x75c681a16000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x215000) = 0x75c681a16000 <0.000023>
+3332  20:07:50.364185 mmap(0x75c681a1c000, 52816, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x75c681a1c000 <0.000023>
+3332  20:07:50.364344 close(3)          = 0 <0.000024>
+3332  20:07:50.364518 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3 <0.000024>
+3332  20:07:50.364676 read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832 <0.000022>
+3332  20:07:50.364832 newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=940560, ...}, AT_EMPTY_PATH) = 0 <0.000020>
+3332  20:07:50.364996 mmap(NULL, 942344, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x75c681b19000 <0.000033>
+3332  20:07:50.365299 mmap(0x75c681b27000, 507904, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xe000) = 0x75c681b27000 <0.000029>
+3332  20:07:50.365481 mmap(0x75c681ba3000, 372736, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x8a000) = 0x75c681ba3000 <0.000033>
+3332  20:07:50.365669 mmap(0x75c681bfe000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xe4000) = 0x75c681bfe000 <0.000046>
+3332  20:07:50.365906 close(3)          = 0 <0.000024>
+3332  20:07:50.366085 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x75c681ee0000 <0.000028>
+3332  20:07:50.366248 arch_prctl(ARCH_SET_FS, 0x75c681ee13c0) = 0 <0.000023>
+3332  20:07:50.366416 set_tid_address(0x75c681ee1690) = 3332 <0.000025>
+3332  20:07:50.366754 set_robust_list(0x75c681ee16a0, 24) = 0 <0.000022>
+3332  20:07:50.366960 rseq(0x75c681ee1d60, 0x20, 0, 0x53053053) = 0 <0.000026>
+3332  20:07:50.367230 mprotect(0x75c681a16000, 16384, PROT_READ) = 0 <0.000059>
+3332  20:07:50.367483 mprotect(0x75c681bfe000, 4096, PROT_READ) = 0 <0.000030>
+3332  20:07:50.367682 mprotect(0x75c681f00000, 4096, PROT_READ) = 0 <0.000028>
+3332  20:07:50.367922 mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x75c681ede000 <0.000026>
+3332  20:07:50.368257 mprotect(0x75c681e1b000, 45056, PROT_READ) = 0 <0.000025>
+3332  20:07:50.368452 mprotect(0x589fa9db0000, 4096, PROT_READ) = 0 <0.000028>
+3332  20:07:50.368623 mprotect(0x75c681f42000, 8192, PROT_READ) = 0 <0.000032>
+3332  20:07:50.368897 prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0 <0.000025>
+3332  20:07:50.369139 munmap(0x75c681f02000, 21696) = 0 <0.000034>
+3332  20:07:50.369387 getrandom("\x07\x00\xe0\xa1\x1d\x9d\x29\xb9", 8, GRND_NONBLOCK) = 8 <0.000026>
+3332  20:07:50.369570 brk(NULL)         = 0x589fcf419000 <0.000023>
+3332  20:07:50.369776 brk(0x589fcf43a000) = 0x589fcf43a000 <0.000024>
+3332  20:07:50.369983 futex(0x75c681e2977c, FUTEX_WAKE_PRIVATE, 2147483647) = 0 <0.000024>
+3332  20:07:50.370195 pipe2([3, 4], 0)  = 0 <0.000027>
+3332  20:07:50.370357 clone(child_stack=NULL, flags=CLONE_CHILD_CLEARTID|CLONE_CHILD_SETTID|SIGCHLD, child_tidptr=0x75c681ee1690) = 3333 <0.000110>
+3333  20:07:50.370601 set_robust_list(0x75c681ee16a0, 24 <unfinished ...>
+3332  20:07:50.370683 close(4 <unfinished ...>
+3333  20:07:50.370765 <... set_robust_list resumed>) = 0 <0.000090>
+3332  20:07:50.370848 <... close resumed>) = 0 <0.000092>
+3333  20:07:50.370916 close(3 <unfinished ...>
+3332  20:07:50.371004 read(3,  <unfinished ...>
+3333  20:07:50.371074 <... close resumed>) = 0 <0.000078>
+3333  20:07:50.371163 dup2(4, 1)        = 1 <0.000024>
+3333  20:07:50.371323 dup2(4, 2)        = 2 <0.000022>
+3333  20:07:50.371495 close(4)          = 0 <0.000021>
+3333  20:07:50.371697 execve("/usr/local/sbin/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000066>
+3333  20:07:50.372020 execve("/usr/local/bin/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000081>
+3333  20:07:50.372319 execve("/usr/sbin/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000045>
+3333  20:07:50.372550 execve("/usr/bin/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000046>
+3333  20:07:50.372776 execve("/sbin/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000041>
+3333  20:07:50.373018 execve("/bin/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000061>
+3333  20:07:50.373496 execve("/usr/games/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000547>
+3333  20:07:50.374404 execve("/usr/local/games/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000355>
+3333  20:07:50.375070 execve("/usr/lib/wsl/lib/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000917>
+3333  20:07:50.376321 execve("/mnt/c/Program Files (x86)/Common Files/Oracle/Java/java8path/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.002109>
+3333  20:07:50.378648 execve("/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.001075>
+3333  20:07:50.379961 execve("/mnt/c/WINDOWS/system32/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000565>
+3333  20:07:50.380730 execve("/mnt/c/WINDOWS/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000335>
+3333  20:07:50.381250 execve("/mnt/c/WINDOWS/System32/Wbem/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000771>
+3333  20:07:50.382215 execve("/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0//definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.001246>
+3333  20:07:50.383638 execve("/mnt/c/WINDOWS/System32/OpenSSH//definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.001073>
+3333  20:07:50.384893 execve("/mnt/c/Program Files/dotnet//definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000545>
+3333  20:07:50.385617 execve("/mnt/c/Program Files/nodejs//definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000545>
+3333  20:07:50.386367 execve("/mnt/c/Program Files/Git/cmd/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000752>
+3333  20:07:50.387327 execve("/mnt/c/Users/zachvem/AppData/Local/Programs/Python/Launcher//definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.002052>
+3333  20:07:50.389591 execve("/mnt/c/Users/zachvem/AppData/Local/Microsoft/WindowsApps/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.001701>
+3333  20:07:50.391517 execve("/mnt/c/Users/zachvem/AppData/Local/Python/bin/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.001767>
+3333  20:07:50.393509 execve("/mnt/c/Program Files/JetBrains/PyCharm 2025.3.1/bin/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.001174>
+3333  20:07:50.394945 execve("/mnt/c/Program Files/JetBrains/CLion 2026.2.2/bin/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.001151>
+3333  20:07:50.396325 execve("/mnt/c/Users/zachvem/AppData/Local/Programs/Ollama/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.001457>
+3333  20:07:50.398001 execve("/mnt/c/Users/zachvem/AppData/Roaming/npm/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.001115>
+3333  20:07:50.399338 execve("/mnt/c/Program Files/JetBrains/IntelliJ IDEA 2026.2.1/bin/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.001111>
+3333  20:07:50.400666 execve("/mnt/c/Users/zachvem/.platformio/penv/Scripts/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000640>
+3333  20:07:50.401549 execve("/snap/bin/definitely-not-a-real-program-xyz", ["definitely-not-a-real-program-xy"...], 0x7ffd24eb4180 /* 33 vars */) = -1 ENOENT (No such file or directory) <0.000056>
+3333  20:07:50.401845 write(2, "execvp failed: ", 15) = 15 <0.000044>
+3332  20:07:50.402085 <... read resumed>"execvp failed: ", 4096) = 15 <0.031019>
+3333  20:07:50.402180 write(2, "No such file or directory", 25 <unfinished ...>
+3332  20:07:50.402287 read(3,  <unfinished ...>
+3333  20:07:50.402389 <... write resumed>) = 25 <0.000112>
+3332  20:07:50.402481 <... read resumed>"No such file or directory", 4096) = 25 <0.000098>
+3333  20:07:50.402585 write(2, "\n", 1 <unfinished ...>
+3332  20:07:50.402684 read(3,  <unfinished ...>
+3333  20:07:50.402762 <... write resumed>) = 1 <0.000085>
+3332  20:07:50.402848 <... read resumed>"\n", 4096) = 1 <0.000093>
+3333  20:07:50.402940 exit_group(127 <unfinished ...>
+3332  20:07:50.403052 read(3,  <unfinished ...>
+3333  20:07:50.403220 <... exit_group resumed>) = ?
+3332  20:07:50.403368 <... read resumed>"", 4096) = 0 <0.000231>
+3333  20:07:50.403464 +++ exited with 127 +++
+3332  20:07:50.403539 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=3333, si_uid=1000, si_status=127, si_utime=0, si_stime=0} ---
+3332  20:07:50.403638 close(3)          = 0 <0.000029>
+3332  20:07:50.403845 wait4(3333, [{WIFEXITED(s) && WEXITSTATUS(s) == 127}], 0, NULL) = 3333 <0.000027>
+3332  20:07:50.404070 newfstatat(1, "", {st_mode=S_IFREG|0777, st_size=0, ...}, AT_EMPTY_PATH) = 0 <0.000130>
+3332  20:07:50.404471 write(1, "--- captured output ---\nexecvp f"..., 119) = 119 <0.000151>
+3332  20:07:50.404833 exit_group(127)   = ?
+3332  20:07:50.405683 +++ exited with 127 +++

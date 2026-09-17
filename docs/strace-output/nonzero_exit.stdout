@@ -1,0 +1,5 @@
+--- captured output ---
+child failed
+--- result ---
+status: exited
+exit_code: 42

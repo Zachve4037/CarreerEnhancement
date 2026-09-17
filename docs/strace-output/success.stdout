@@ -1,0 +1,6 @@
+--- captured output ---
+hello from child
+child warning
+--- result ---
+status: exited
+exit_code: 0
