@@ -9,7 +9,7 @@
 namespace frame {
   constexpr std::size_t MAX_FRAME_SIZE = 1024 * 1024;
 
-  int send(int socket_fd, std::string_view payload);
+  void send(int socket_fd, std::string_view payload);
   static std::string receive(int socket_fd);
 };
 #endif // CPPFIRST_FRAME_H
