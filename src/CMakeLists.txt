@@ -21,6 +21,9 @@ add_library(core
         7_week_networking_and_protocol_framing/tcp_client.h
         7_week_networking_and_protocol_framing/socket_utils.cpp
         7_week_networking_and_protocol_framing/socket_utils.h
+        8_week_threads_atomics_and_bounded_queues/bounded_blocking_queue.h
+        8_week_threads_atomics_and_bounded_queues/spsc_queue.h
+        8_week_threads_atomics_and_bounded_queues/queue_demo.cpp
 )
 
 add_executable(cppfirst

@@ -18,6 +18,8 @@ add_executable(runUnitTests
         process_supervisor_test.cpp
         frame_test.cpp
         tcp_server_test.cpp
+        bounded_blocking_queue_test.cpp
+        spsc_queue_test.cpp
 )
 
 target_link_libraries(runUnitTests
