@@ -37,3 +37,5 @@ implementations are just small wrappers around them using RAII.
 * binary_search -> implementation of binary search tree with emphasis on the invariants
 * byte_buffer -> implementation of byte_buffer with copy and move semantics along with tests of the implementation
 * process_supervisor -> implementation of process supervisor
+* TCP server and client using Linux sockets. 4-byte length-prefixed messages. Handling partial sends and receive timeouts. Client reconnection with a limited number of retries. Google Test tests using socketpair() and a local TCP server.
+

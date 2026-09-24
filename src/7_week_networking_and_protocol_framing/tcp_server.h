@@ -1,12 +1,22 @@
-//
-// Created by zachvem on 16-Sep-26.
-//
+#pragma once
 
-#ifndef CPPFIRST_TCP_SERVER_H
-#define CPPFIRST_TCP_SERVER_H
+#include <cstdint>
 
-class tcp_server {
+class TcpServer {
+public:
+  explicit TcpServer(std::uint16_t port);
 
+  // Blocks while the server is running.
+  // Returns when stop() is called.
+  void run();
+
+  // Requests that the server stop.
+  void stop() noexcept;
+
+private:
+  void handle_client(int client_fd);
+
+  std::uint16_t port_;
+  int server_fd_{-1};
+  bool running_{false};
 };
-
-#endif // CPPFIRST_TCP_SERVER_H

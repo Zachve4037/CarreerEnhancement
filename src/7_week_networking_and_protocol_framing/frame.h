@@ -1,15 +1,19 @@
-//
-// Created by zachvem on 16-Sep-26.
-//
+#pragma once
 
-#ifndef CPPFIRST_FRAME_H
-#define CPPFIRST_FRAME_H
+#include <cstddef>
 #include <string>
+#include <string_view>
 
 namespace frame {
-  constexpr std::size_t MAX_FRAME_SIZE = 1024 * 1024;
 
-  void send(int socket_fd, std::string_view payload);
-  std::string receive(int socket_fd);
-};
-#endif // CPPFIRST_FRAME_H
+// Maximum allowed payload: 1 MiB, excluding the 4-byte header.
+constexpr std::size_t MAX_FRAME_SIZE = 1024 * 1024;
+
+// Wire format: 4-byte unsigned length in network byte order,
+// followed by exactly length bytes of payload.
+void send(int socket_fd, std::string_view payload);
+
+// Reads one complete frame and returns its payload.
+std::string receive(int socket_fd);
+
+}
