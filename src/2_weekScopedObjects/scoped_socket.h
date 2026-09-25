@@ -22,7 +22,7 @@ public:
   int get() const noexcept;
 
 private:
-  SOCKET fd_{INVALID_SOCKET};
+  SOCKET fd_{-1};
 };
 
 #endif // CPPFIRST_SCOPEDSOCKET_H

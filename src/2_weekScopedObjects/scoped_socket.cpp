@@ -6,17 +6,21 @@
 ///i have installed wsl and compiled and tested it there
 #include "scoped_socket.h"
 
+#include <cerrno>
+#include <stdexcept>
 #include <system_error>
+
 #include <sys/socket.h>
+#include <unistd.h>
 
 scoped_socket::scoped_socket(int protocol) {
   this->fd_ = ::socket(AF_INET, SOCK_STREAM, protocol);
-  if (this->fd_ == INVALID_SOCKET) {
-    throw std::system_error(
-      errno,
-      std::generic_category(),
-      "Failed to create socket!");
-  }
+  if (fd_ == -1) {
+  throw std::system_error(
+    errno,
+    std::generic_category(),
+    "socket creation failed"
+    );
 }
 
 scoped_socket::~scoped_socket() {
