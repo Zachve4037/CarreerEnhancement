@@ -8,6 +8,7 @@
 #include <mutex>
 #include <queue>
 #include <condition_variable>
+#include <stdexcept>
 template <typename T>
 class BoundedBlockingQueue {
 public:
@@ -18,29 +19,33 @@ public:
     }
   };
   void push(T item) {
-    std::unique_lock<std::mutex> lock(mutex_);
+    std::unique_lock lock(mutex_);
 
     not_full_.wait(lock, [this] {
       return queue_.size() < capacity_;
     });
-    queue_.push(item);
-    lock.release();
-    //notify waiting consumer
+    queue_.push(std::move(item));
+    not_empty_.notify_one();
   }
+
   T pop() {
-    std::unique_lock<std::mutex> lock(mutex_);
+    std::unique_lock lock(mutex_);
 
     not_empty_.wait(lock, [this] {
-      return queue_.size() == capacity_;
+      return !queue_.empty();
     });
-    T return_item = queue_.pop();
-    lock.release();
-    //notify waiting producer
+    T return_item = std::move(queue_.front());
+    queue_.pop();
+    not_full_.notify_one();
+
     return return_item;
   }
+
   std::size_t size() const {
+    std::lock_guard lock(mutex_);
     return queue_.size();
   }
+
   std::size_t capacity() const {
     return capacity_;
   }
