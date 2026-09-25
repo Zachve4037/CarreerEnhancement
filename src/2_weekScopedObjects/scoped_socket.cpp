@@ -7,7 +7,7 @@
 #include "scoped_socket.h"
 
 #include <system_error>
-#include <winsock2.h>
+#include <sys/socket.h>
 
 scoped_socket::scoped_socket(int protocol) {
   this->fd_ = ::socket(AF_INET, SOCK_STREAM, protocol);
