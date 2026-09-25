@@ -6,7 +6,7 @@
 
 #ifndef CPPFIRST_SCOPEDSOCKET_H
 #define CPPFIRST_SCOPEDSOCKET_H
-#include <psdk_inc/_socket_types.h>
+#include <sys/socket.h>
 
 class scoped_socket {
 public:
