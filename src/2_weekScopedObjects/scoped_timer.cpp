@@ -5,8 +5,8 @@
 #include "scoped_timer.h"
 
 #include <cerrno>
-#include <pthread_time.h>
 #include <sys/timerfd.h>
+#include <ctime>
 #include <system_error>
 #include <unistd.h>
 ///for the record I am currently on windows so that's why it is commented out
