@@ -1,16 +1,10 @@
-//
-// Created by zachvem on 12-Aug-26.
-//
-///for the record I am currently on windows so that's why it is commented out
-///i have installed wsl and compiled and tested it there
-
-#ifndef CPPFIRST_SCOPEDSOCKET_H
-#define CPPFIRST_SCOPEDSOCKET_H
-#include <sys/socket.h>
+#ifndef CPPFIRST_SCOPED_SOCKET_H
+#define CPPFIRST_SCOPED_SOCKET_H
 
 class scoped_socket {
 public:
   explicit scoped_socket(int protocol);
+
   ~scoped_socket();
 
   scoped_socket(const scoped_socket&) = delete;
@@ -22,7 +16,7 @@ public:
   int get() const noexcept;
 
 private:
-  SOCKET fd_{-1};
+  int fd_{-1};
 };
 
-#endif // CPPFIRST_SCOPEDSOCKET_H
+#endif // CPPFIRST_SCOPED_SOCKET_H
