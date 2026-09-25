@@ -1,8 +1,5 @@
 #include "../src/2_weekScopedObjects/scoped_socket.h"
 #include "gtest/gtest.h"
-#include <windows.h>
-///for the record I am currently on windows so that's why it is commented out
-///i have installed wsl and compiled and tested it there
 
 TEST(ScopedSocket, SuccessfulConstruction) {
   int fd;
@@ -28,7 +25,7 @@ TEST(ScopedSocketTest, MoveConstructorTransfersOwnership)
 TEST(ScopedSocketTest, MoveAssignmentTransfersOwnership)
 {
   scoped_socket first(0);
-  scoped_socket second(1);1
+  scoped_socket second(1);
 
   int fd = first.get();
 
