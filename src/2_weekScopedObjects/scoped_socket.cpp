@@ -1,49 +1,49 @@
-//
-// Created by zachvem on 12-Aug-26.
-//
-
-///for the record I am currently on windows so that's why it is commented out
-///i have installed wsl and compiled and tested it there
 #include "scoped_socket.h"
 
 #include <cerrno>
-#include <stdexcept>
 #include <system_error>
 
 #include <sys/socket.h>
 #include <unistd.h>
 
 scoped_socket::scoped_socket(int protocol) {
-  this->fd_ = ::socket(AF_INET, SOCK_STREAM, protocol);
+  fd_ = ::socket(AF_INET, SOCK_STREAM, protocol);
+
   if (fd_ == -1) {
-  throw std::system_error(
-    errno,
-    std::generic_category(),
-    "socket creation failed"
+    throw std::system_error(
+        errno,
+        std::generic_category(),
+        "socket creation failed"
     );
+  }
 }
 
 scoped_socket::~scoped_socket() {
-  if (this->fd_ != INVALID_SOCKET) {
-    ::closesocket(this->fd_);
+  if (fd_ != -1) {
+    ::close(fd_);
   }
 }
 
-scoped_socket::scoped_socket(scoped_socket &&other) noexcept : fd_(other.fd_) {
-  other.fd_ = INVALID_SOCKET;
+scoped_socket::scoped_socket(scoped_socket&& other) noexcept
+    : fd_(other.fd_) {
+  other.fd_ = -1;
 }
 
-scoped_socket &scoped_socket::operator=(scoped_socket &&other) noexcept {
+scoped_socket& scoped_socket::operator=(
+    scoped_socket&& other
+) noexcept {
   if (this != &other) {
-    if (this->fd_ != INVALID_SOCKET) {
-      ::closesocket(this->fd_);
+    if (fd_ != -1) {
+      ::close(fd_);
     }
-    this->fd_ = other.fd_;
-    other.fd_ = INVALID_SOCKET;
+
+    fd_ = other.fd_;
+    other.fd_ = -1;
   }
+
   return *this;
 }
 
 int scoped_socket::get() const noexcept {
-  return this->fd_;
+  return fd_;
 }
