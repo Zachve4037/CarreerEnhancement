@@ -4,8 +4,8 @@
 
 #include "../src/8_week_threads_atomics_and_bounded_queues/bounded_blocking_queue.h"
 #include "gtest/gtest.h"
-#include <future>
 #include <chrono>
+#include <future>
 
 using namespace std::chrono_literals;
 
@@ -39,12 +39,10 @@ TEST(bounded_blocking_queue_test, FullCapactiy) {
 TEST(bounded_blocking_queue_test, ConsumerBlockedAndAwakened) {
   BoundedBlockingQueue<int> queue(1);
 
-  auto consumer = std::async(std::launch::async, [&queue] {
-      return queue.pop();
-  });
+  auto consumer =
+      std::async(std::launch::async, [&queue] { return queue.pop(); });
 
-  EXPECT_EQ(consumer.wait_for(100ms),
-            std::future_status::timeout);
+  EXPECT_EQ(consumer.wait_for(100ms), std::future_status::timeout);
 
   queue.push(42);
 
@@ -56,12 +54,9 @@ TEST(bounded_blocking_queue_test, ProducerBlockedAndAwakened) {
 
   queue.push(1);
 
-  auto producer = std::async(std::launch::async, [&queue] {
-    queue.push(2);
-  });
+  auto producer = std::async(std::launch::async, [&queue] { queue.push(2); });
 
-  EXPECT_EQ(producer.wait_for(100ms),
-    std::future_status::timeout);
+  EXPECT_EQ(producer.wait_for(100ms), std::future_status::timeout);
 
   EXPECT_EQ(queue.pop(), 1);
   producer.get();
