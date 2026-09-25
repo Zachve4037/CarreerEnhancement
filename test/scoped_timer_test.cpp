@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../src/scoped_timer.h"
+#include "../src/2_weekScopedObjects/scoped_timer.h"
 
 ///for the record I am currently on windows so that's why it is commented out
 ///i have installed wsl and compiled and tested it there
