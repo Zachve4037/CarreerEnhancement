@@ -16,23 +16,22 @@ TEST(spsc_queue_test, StorecCapacity) {
 TEST(spsc_queue_test, EmptyQueue) {
   SPSCQueue<int> queue(1);
   int item;
-  EXPECT_EQ(queue.try_pop(item), false);
+  ASSERT_FALSE(queue.try_pop(item));
 }
 
 TEST(spsc_queue_test, PushAndPop) {
   SPSCQueue<int> queue(1);
   queue.try_push(1);
   int poped;
-  EXPECT_EQ(queue.try_pop(poped), true);
+  ASSERT_TRUE(queue.try_pop(poped));
   EXPECT_EQ(poped, 1);
 }
 
 TEST(spsc_queue_test, FullQueue) {
   SPSCQueue<int> queue(1);
   queue.try_push(1);
-  EXPECT_EQ(queue.try_push(2), false);
+  ASSERT_FALSE(queue.try_push(2));
 }
-//wraparound - pop some items push more verify FIFO order
 
 TEST(spsc_queue_test, FIFO) {
   SPSCQueue<int> queue(3);
