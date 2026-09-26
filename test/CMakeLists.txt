@@ -27,6 +27,12 @@ target_link_libraries(runUnitTests
         core
         GTest::gtest_main
 )
+find_package(Threads REQUIRED)
+target_link_libraries(runUnitTests
+        PRIVATE
+        GTest::gtest_main
+        Threads::Threads
+)
 
 include(GoogleTest)
 gtest_discover_tests(runUnitTests)
