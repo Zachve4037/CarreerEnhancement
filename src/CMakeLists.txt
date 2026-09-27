@@ -24,6 +24,7 @@ add_library(core
         8_week_threads_atomics_and_bounded_queues/bounded_blocking_queue.h
         8_week_threads_atomics_and_bounded_queues/spsc_queue.h
         8_week_threads_atomics_and_bounded_queues/queue_demo.cpp
+        8_week_threads_atomics_and_bounded_queues/queue_benchmark.cpp
 )
 
 add_executable(cppfirst
@@ -42,4 +43,15 @@ add_executable(process_supervisor_demo
 target_link_libraries(process_supervisor_demo
         PRIVATE
         core
+)
+
+find_package(Threads REQUIRED)
+
+add_executable(queue_benchmark
+        ../src/8_week_threads_atomics_and_bounded_queues/queue_benchmark.cpp
+)
+
+target_link_libraries(queue_benchmark
+        PRIVATE
+        Threads::Threads
 )
