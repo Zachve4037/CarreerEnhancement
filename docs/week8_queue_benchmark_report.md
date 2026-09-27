@@ -22,23 +22,6 @@
 
 ## Correctness
 
-* Unit tests: Implemented tests for zero capacity, full /empty queue, fifo push and pop,
+* Unit tests: Implemented tests for zero capacity, full /empty queue, FIFO push and pop,
 * Concurrent stress test: Implemented a producer-consumer test transferring 100,000 sequential integers trhough the SPSC
-queue, verifying FIFO order and detecting missing or reordeder value.
-* ThreadSanitizer result:
-
-## Profiling
-
-* Flame graph:
-* Observed hotspots:
-
-## Analysis
-
-* How does SPSC compare with the blocking queue at 1P/1C?
-* How does throughput change with more producers and consumers?
-* What bottlenecks appear in the blocking queue?
-* What are the limitations of this benchmark?
-
-## Conclusion
-
-Summarize measured results and possible improvements.
+queue, verifying FIFO order and detecting missing or reordered value.
