@@ -25,6 +25,7 @@ add_library(core
         8_week_threads_atomics_and_bounded_queues/spsc_queue.h
         8_week_threads_atomics_and_bounded_queues/queue_demo.cpp
         8_week_threads_atomics_and_bounded_queues/queue_benchmark.cpp
+        9_week_portfolio_architecture/order.h
 )
 
 add_executable(cppfirst
