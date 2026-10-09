@@ -20,6 +20,7 @@ add_executable(runUnitTests
         tcp_server_test.cpp
         bounded_blocking_queue_test.cpp
         spsc_queue_test.cpp
+        order_test.cpp
 )
 
 target_link_libraries(runUnitTests
