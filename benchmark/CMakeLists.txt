@@ -12,6 +12,8 @@ FetchContent_MakeAvailable(google_benchmark)
 
 add_executable(byte_buffer_benchmark
         byte_buffer_benchmark.cpp
+        ../matching-engine/src/orderbook/command_parser.h
+        ../matching-engine/src/orderbook/command_parser.cpp
 )
 
 target_link_libraries(byte_buffer_benchmark

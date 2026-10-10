@@ -75,4 +75,15 @@ inline std::optional<ValidationError> validate(const NewOrder& command) {
   }
   return std::nullopt;
 }
+
+[[nodiscard]]
+inline std::optional<ValidationError>
+validate(const CancelOrder& command) {
+  if (command.id == 0) {
+    return ValidationError::InvalidOrderId;
+  }
+
+  return std::nullopt;
+}
+
 #endif // CPPFIRST_ORDER_H
