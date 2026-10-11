@@ -2,3 +2,5 @@
 /build-release/
 /.idea
 /build-tsan/
+/matching-engine/build/
+/matching-engine/cmake-build-debug/
