@@ -61,7 +61,7 @@ enum class ValidationError {
 
 [[nodiscard]]
 inline std::optional<ValidationError> validate(const NewOrder& command) {
-  if (command.id == 0) {
+  if (command.id <= 0) {
     return ValidationError::InvalidOrderId;
   }
   if (command.side != Side::Buy && command.side != Side::Sell) {
