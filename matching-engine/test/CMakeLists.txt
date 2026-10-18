@@ -1,20 +1,21 @@
 include(FetchContent)
 
 FetchContent_Declare(
-    googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG v1.17.0
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG v1.17.0
 )
 
 FetchContent_MakeAvailable(googletest)
 
 add_executable(command_parser_test
-    command_parser_test.cpp
-    ../src/orderbook/command_parser.cpp
+        command_parser_test.cpp
+        order_book_test.cpp
+        ../src/orderbook/command_parser.cpp
 )
 
 target_link_libraries(command_parser_test
-    PRIVATE GTest::gtest_main
+        PRIVATE GTest::gtest_main
 )
 
 include(GoogleTest)
