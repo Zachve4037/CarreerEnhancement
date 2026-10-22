@@ -1,7 +1,6 @@
 #include "../src/orderbook/command_parser.h"
 
 #include <gtest/gtest.h>
-#include <variant>
 
 TEST(CommandParser, ParsesBuyOrder) {
     const auto result = parse_command("NEW 1 BUY 10500 10");
