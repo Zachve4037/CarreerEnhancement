@@ -1,7 +1,6 @@
 #ifndef CPPFIRST_ORDER_BOOK_H
 #define CPPFIRST_ORDER_BOOK_H
 
-#include "../../../cmake-build-debug/_deps/google_benchmark-src/src/arraysize.h"
 #include "order.h"
 
 #include <cstddef>
