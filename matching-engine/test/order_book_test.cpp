@@ -1,6 +1,4 @@
-#include "../../cmake-build-debug/_deps/googletest-src/googletest/include/gtest/gtest.h"
 #include "../src/orderbook/order_book.h"
-
 #include <gtest/gtest.h>
 
 TEST(OrderBook, EmptyBookHasNoBestPrices) {
@@ -72,7 +70,7 @@ TEST(OrderBook, PriceCrossing2) {
 
 TEST(OrderBook, PriceCrossing3) {
   OrderBook book;
-  EXPECT_TRUE(book.prices_cross(Side::Buy, 10400, 10500));
+  EXPECT_TRUE(book.prices_cross(Side::Sell, 10400, 10500));
 }
 
 TEST(OrderBook, PriceCrossing4) {

@@ -11,6 +11,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable(command_parser_test
         command_parser_test.cpp
         order_book_test.cpp
+        ../src/orderbook/command_parser.cpp
 )
 
 target_link_libraries(command_parser_test

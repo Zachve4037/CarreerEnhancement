@@ -66,12 +66,9 @@ public:
   }
 
   bool prices_cross(Side side_, Price price_, Price best_from_opposite_) {
-    if ((side_ == Side::Buy && price_ >= best_from_opposite_) ||
-        (side_ == Side::Sell && price_ <= best_from_opposite_)) {
-      return true;
-    }
-    return false;
-  }
+    return (side_ == Side::Buy && price_ >= best_from_opposite_) ||
+           (side_ == Side::Sell && price_ <= best_from_opposite_);
+}
 
 private:
   std::map<Price, PriceLevel, std::greater<Price>> bids_;

@@ -1,5 +1,4 @@
 #include "../src/orderbook/command_parser.h"
-
 #include <gtest/gtest.h>
 
 TEST(CommandParser, ParsesBuyOrder) {
