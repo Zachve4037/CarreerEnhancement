@@ -2,7 +2,6 @@
 #define CPPFIRST_ORDER_BOOK_H
 
 #include "order.h"
-
 #include <cstddef>
 #include <functional>
 #include <map>
@@ -11,6 +10,13 @@
 struct PriceLevel {
   Quantity total_quantity{0};
   std::size_t order_count{0};
+};
+
+struct ExecutionEvent {
+  OrderId buy_order_id_l;
+  OrderId sell_order_id_;
+  Price execution_price_;
+  Quantity executed_quantity_;
 };
 
 class OrderBook {
