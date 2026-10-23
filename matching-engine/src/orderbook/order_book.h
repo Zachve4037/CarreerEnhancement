@@ -64,10 +64,20 @@ public:
     return asks_.size();
   }
 
-  bool prices_cross(Side side_, Price price_, Price best_from_opposite_) {
-    return (side_ == Side::Buy && price_ >= best_from_opposite_) ||
-           (side_ == Side::Sell && price_ <= best_from_opposite_);
-}
+  [[nodiscard]] bool prices_cross(Side side_, Price price_, Price suggestion_) {
+    return (side_ == Side::Buy && price_ >= suggestion_) ||
+           (side_ == Side::Sell && price_ <= suggestion_);
+  }
+
+  [[nodiscard]] std::optional<Price> best_opposite_price(Side side_) {
+    if (side_ == Side::Buy && !asks_.empty()) {
+      return asks_.begin()->first;
+    }
+    if (side_ == Side::Sell && !bids_.empty()) {
+      return bids_.begin()->first;
+    }
+    return std::nullopt;
+  }
 
 private:
   std::map<Price, PriceLevel, std::greater<Price>> bids_;

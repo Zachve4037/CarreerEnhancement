@@ -77,3 +77,29 @@ TEST(OrderBook, PriceCrossing4) {
   OrderBook book;
   EXPECT_FALSE(book.prices_cross(Side::Sell, 10600, 10500));
 }
+
+TEST(OrderBook, Aplly_fill_partially_filled) {
+  OrderBook book;
+  auto *order = new Order(1, Side::Buy, 1, 10, 1) ;
+  static_cast<void>(order->apply_fill(4));
+  EXPECT_EQ(order->status, OrderStatus::PartiallyFilled);
+}
+
+TEST(OrderBook, Aplly_fill_filled) {
+  OrderBook book;
+  auto *order = new Order(1, Side::Buy, 1, 10, 1) ;
+  static_cast<void>(order->apply_fill(10));
+  EXPECT_EQ(order->status, OrderStatus::Filled);
+}
+
+TEST(OrderBook, Aplly_fill_zero_quantity) {
+  OrderBook book;
+  auto *order = new Order(1, Side::Buy, 1, 10, 1) ;
+  EXPECT_FALSE(order->apply_fill(0));
+}
+
+TEST(OrderBook, Aplly_fill_overflow) {
+  OrderBook book;
+  auto *order = new Order(1, Side::Buy, 1, 10, 1) ;
+  EXPECT_FALSE(order->apply_fill(11));
+}

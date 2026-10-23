@@ -28,17 +28,30 @@ struct Order {
   Sequence sequence;
   OrderStatus status;
 
-  Order(OrderId order_id, Side order_side, Price order_price, Quantity order_quantity,
-        Sequence order_sequence)
-      : id(order_id), side(order_side), price(order_price), quantity(order_quantity),
-        filled_quantity(0), sequence(order_sequence), status(OrderStatus::New) {}
+  Order(OrderId order_id, Side order_side, Price order_price,
+        Quantity order_quantity, Sequence order_sequence)
+      : id(order_id), side(order_side), price(order_price),
+        quantity(order_quantity), filled_quantity(0), sequence(order_sequence),
+        status(OrderStatus::New) {}
 
   [[nodiscard]]
   Quantity remaining_quantity() const noexcept {
     return quantity - filled_quantity;
   }
 
-
+  [[nodiscard]] bool apply_fill(Quantity quantity_) {
+    if (quantity_ <= remaining_quantity() && quantity_ != 0) {
+      filled_quantity += quantity_;
+    } else {
+      return false;
+    }
+    if (remaining_quantity() == 0) {
+      status = OrderStatus::Filled;
+    } else {
+      status = OrderStatus::PartiallyFilled;
+    }
+    return true;
+  }
 };
 
 struct NewOrder {
@@ -60,7 +73,7 @@ enum class ValidationError {
 };
 
 [[nodiscard]]
-inline std::optional<ValidationError> validate(const NewOrder& command) {
+inline std::optional<ValidationError> validate(const NewOrder &command) {
   if (command.id <= 0) {
     return ValidationError::InvalidOrderId;
   }
@@ -77,8 +90,7 @@ inline std::optional<ValidationError> validate(const NewOrder& command) {
 }
 
 [[nodiscard]]
-inline std::optional<ValidationError>
-validate(const CancelOrder& command) {
+inline std::optional<ValidationError> validate(const CancelOrder &command) {
   if (command.id == 0) {
     return ValidationError::InvalidOrderId;
   }
