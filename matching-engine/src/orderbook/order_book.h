@@ -6,6 +6,7 @@
 #include <functional>
 #include <map>
 #include <optional>
+#include <algorithm>
 
 struct PriceLevel {
   Quantity total_quantity{0};
@@ -70,7 +71,7 @@ public:
     return asks_.size();
   }
 
-  [[nodiscard]] bool prices_cross(Side side_, Price price_, Price suggestion_) {
+  [[nodiscard]] static bool prices_cross(Side side_, Price price_, Price suggestion_) {
     return (side_ == Side::Buy && price_ >= suggestion_) ||
            (side_ == Side::Sell && price_ <= suggestion_);
   }
@@ -81,6 +82,27 @@ public:
     }
     if (side_ == Side::Sell && !bids_.empty()) {
       return bids_.begin()->first;
+    }
+    return std::nullopt;
+  }
+
+  [[nodiscard]] std::optional<ExecutionEvent> execute_event(Order& incoming, Order& resting) {
+    if (incoming.side == resting.side) {
+      return std::nullopt;
+    }
+    if (!prices_cross(incoming.side, incoming.price, resting.price)) {
+      return std::nullopt;
+    }
+    const Quantity executed_quantity =
+        std::min(resting.remaining_quantity(), incoming.remaining_quantity());
+    if (executed_quantity != 0) {
+      bool resting_applied = resting.apply_fill(executed_quantity);
+      bool incoming_applied = incoming.apply_fill(executed_quantity);
+      if (resting_applied && incoming_applied) {
+        std::uint64_t buy_order_id_ = incoming.side == Side::Buy ? incoming.id : resting.id;
+        std::uint64_t sell_order_id = incoming.side == Side::Sell ? resting.id : incoming.id;
+        return ExecutionEvent(buy_order_id_, sell_order_id, resting.price, executed_quantity);
+      }
     }
     return std::nullopt;
   }
