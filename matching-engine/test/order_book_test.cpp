@@ -80,26 +80,49 @@ TEST(OrderBook, PriceCrossing4) {
 
 TEST(OrderBook, Aplly_fill_partially_filled) {
   OrderBook book;
-  auto *order = new Order(1, Side::Buy, 1, 10, 1) ;
-  static_cast<void>(order->apply_fill(4));
-  EXPECT_EQ(order->status, OrderStatus::PartiallyFilled);
+  Order order = Order(1, Side::Buy, 1, 10, 1) ;
+  static_cast<void>(order.apply_fill(4));
+  EXPECT_EQ(order.status, OrderStatus::PartiallyFilled);
 }
 
 TEST(OrderBook, Aplly_fill_filled) {
   OrderBook book;
-  auto *order = new Order(1, Side::Buy, 1, 10, 1) ;
-  static_cast<void>(order->apply_fill(10));
-  EXPECT_EQ(order->status, OrderStatus::Filled);
+  Order order = Order(1, Side::Buy, 1, 10, 1) ;
+  static_cast<void>(order.apply_fill(10));
+  EXPECT_EQ(order.status, OrderStatus::Filled);
 }
 
 TEST(OrderBook, Aplly_fill_zero_quantity) {
   OrderBook book;
-  auto *order = new Order(1, Side::Buy, 1, 10, 1) ;
-  EXPECT_FALSE(order->apply_fill(0));
+  Order order = Order(1, Side::Buy, 1, 10, 1) ;
+  EXPECT_FALSE(order.apply_fill(0));
 }
 
 TEST(OrderBook, Aplly_fill_overflow) {
   OrderBook book;
-  auto *order = new Order(1, Side::Buy, 1, 10, 1) ;
-  EXPECT_FALSE(order->apply_fill(11));
+  Order order = Order(1, Side::Buy, 1, 10, 1) ;
+  EXPECT_FALSE(order.apply_fill(11));
+}
+
+TEST(OrderBook, Order_in_index_after_insert) {
+  OrderBook book;
+  book.process_order(Order(101, Side::Buy, 1, 1, 1));
+  EXPECT_TRUE(book.contains_order(101));
+}
+
+TEST(OrderBook, Order_in_index_after_partial_fill) {
+    OrderBook book;
+    book.process_order(Order(101, Side::Sell, 100, 5, 1));
+    book.process_order(Order(102, Side::Buy, 100, 3, 2));
+    EXPECT_TRUE(book.contains_order(101));
+}
+
+TEST(OrderBook, Id_disappear_after_fill) {
+    OrderBook book;
+    Order order1(101, Side::Sell, 100, 5, 1);
+    Order order2(102, Side::Buy, 100, 5, 2);
+    book.process_order(order1);
+    EXPECT_TRUE(book.contains_order(101));
+    book.process_order(order2);
+    EXPECT_FALSE(book.contains_order(101));
 }
