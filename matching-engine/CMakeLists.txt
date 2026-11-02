@@ -12,7 +12,6 @@ add_executable(matching_engine_demo
         src/main.cpp
         src/orderbook/command_parser.cpp
         src/orderbook/request_processor.h
-        test/request_processor_test.cpp
 )
 
 add_subdirectory(test)
