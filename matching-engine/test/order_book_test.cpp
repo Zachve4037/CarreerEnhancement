@@ -80,27 +80,27 @@ TEST(OrderBook, PriceCrossing4) {
 
 TEST(OrderBook, Aplly_fill_partially_filled) {
   OrderBook book;
-  Order order = Order(1, Side::Buy, 1, 10, 1) ;
+  Order order = Order(1, Side::Buy, 1, 10, 1);
   static_cast<void>(order.apply_fill(4));
   EXPECT_EQ(order.status, OrderStatus::PartiallyFilled);
 }
 
 TEST(OrderBook, Aplly_fill_filled) {
   OrderBook book;
-  Order order = Order(1, Side::Buy, 1, 10, 1) ;
+  Order order = Order(1, Side::Buy, 1, 10, 1);
   static_cast<void>(order.apply_fill(10));
   EXPECT_EQ(order.status, OrderStatus::Filled);
 }
 
 TEST(OrderBook, Aplly_fill_zero_quantity) {
   OrderBook book;
-  Order order = Order(1, Side::Buy, 1, 10, 1) ;
+  Order order = Order(1, Side::Buy, 1, 10, 1);
   EXPECT_FALSE(order.apply_fill(0));
 }
 
 TEST(OrderBook, Aplly_fill_overflow) {
   OrderBook book;
-  Order order = Order(1, Side::Buy, 1, 10, 1) ;
+  Order order = Order(1, Side::Buy, 1, 10, 1);
   EXPECT_FALSE(order.apply_fill(11));
 }
 
@@ -111,20 +111,20 @@ TEST(OrderBook, Order_in_index_after_insert) {
 }
 
 TEST(OrderBook, Order_in_index_after_partial_fill) {
-    OrderBook book;
-    book.process_order(Order(101, Side::Sell, 100, 5, 1));
-    book.process_order(Order(102, Side::Buy, 100, 3, 2));
-    EXPECT_TRUE(book.contains_order(101));
+  OrderBook book;
+  book.process_order(Order(101, Side::Sell, 100, 5, 1));
+  book.process_order(Order(102, Side::Buy, 100, 3, 2));
+  EXPECT_TRUE(book.contains_order(101));
 }
 
 TEST(OrderBook, Id_disappear_after_fill) {
-    OrderBook book;
-    Order order1(101, Side::Sell, 100, 5, 1);
-    Order order2(102, Side::Buy, 100, 5, 2);
-    book.process_order(order1);
-    EXPECT_TRUE(book.contains_order(101));
-    book.process_order(order2);
-    EXPECT_FALSE(book.contains_order(101));
+  OrderBook book;
+  Order order1(101, Side::Sell, 100, 5, 1);
+  Order order2(102, Side::Buy, 100, 5, 2);
+  book.process_order(order1);
+  EXPECT_TRUE(book.contains_order(101));
+  book.process_order(order2);
+  EXPECT_FALSE(book.contains_order(101));
 }
 
 TEST(OrderBook, Cancel_an_existing_order) {
@@ -177,4 +177,93 @@ TEST(OrderBook, Reject_duplicate_order_id) {
   book.process_order(Order(101, Side::Sell, 105, 5, 2));
   EXPECT_EQ(book.bid_level_count(), 1);
   EXPECT_EQ(book.ask_level_count(), 0);
+}
+
+TEST(OrderBook, Successful_replacement) {
+  OrderBook book;
+
+  book.process_order(Order(101, Side::Buy, 100, 10, 1));
+
+  auto result = book.replace_order(101, Order(102, Side::Buy, 99, 15, 2));
+
+  ASSERT_TRUE(result.has_value());
+  EXPECT_TRUE(result->empty());
+
+  EXPECT_FALSE(book.contains_order(101));
+  EXPECT_TRUE(book.contains_order(102));
+
+  EXPECT_EQ(book.bid_level_count(), 1);
+  EXPECT_EQ(book.best_bid(), 99);
+  EXPECT_EQ(book.bid_level(99)->total_quantity, 15);
+}
+
+TEST(OrderBook, Replacement_of_nonexistent_order) {
+  OrderBook book;
+
+  auto result = book.replace_order(101, Order(102, Side::Buy, 99, 15, 2));
+
+  EXPECT_FALSE(result.has_value());
+  EXPECT_FALSE(book.contains_order(101));
+  EXPECT_FALSE(book.contains_order(102));
+  EXPECT_EQ(book.bid_level_count(), 0);
+}
+
+TEST(OrderBook, Invalid_replacement_preserves_original) {
+  OrderBook book;
+
+  book.process_order(Order(101, Side::Buy, 100, 10, 1));
+
+  auto result = book.replace_order(101, Order(102, Side::Buy, 0, 15, 2));
+
+  EXPECT_FALSE(result.has_value());
+
+  EXPECT_TRUE(book.contains_order(101));
+  EXPECT_FALSE(book.contains_order(102));
+
+  EXPECT_EQ(book.best_bid(), 100);
+  EXPECT_EQ(book.bid_level(100)->total_quantity, 10);
+}
+
+TEST(OrderBook, Duplicate_replacement_id_is_rejected) {
+  OrderBook book;
+
+  book.process_order(Order(101, Side::Buy, 100, 10, 1));
+  book.process_order(Order(102, Side::Sell, 110, 5, 2));
+
+  auto result = book.replace_order(101, Order(102, Side::Buy, 99, 15, 3));
+
+  EXPECT_FALSE(result.has_value());
+
+  EXPECT_TRUE(book.contains_order(101));
+  EXPECT_TRUE(book.contains_order(102));
+
+  EXPECT_EQ(book.best_bid(), 100);
+  EXPECT_EQ(book.best_ask(), 110);
+}
+
+TEST(OrderBook, Replacement_can_execute_immediately) {
+  OrderBook book;
+
+  // Existing resting sell order.
+  book.process_order(Order(102, Side::Sell, 100, 5, 1));
+
+  // Original buy order, which will be replaced.
+  book.process_order(Order(101, Side::Buy, 90, 10, 2));
+
+  auto result = book.replace_order(101, Order(103, Side::Buy, 100, 5, 3));
+
+  ASSERT_TRUE(result.has_value());
+  ASSERT_EQ(result->size(), 1);
+
+  EXPECT_EQ((*result)[0].buy_order_id_, 103);
+  EXPECT_EQ((*result)[0].sell_order_id_, 102);
+  EXPECT_EQ((*result)[0].execution_price_, 100);
+  EXPECT_EQ((*result)[0].executed_quantity_, 5);
+
+  EXPECT_FALSE(book.contains_order(101));
+  EXPECT_FALSE(book.contains_order(102));
+  EXPECT_FALSE(book.contains_order(103));
+
+  EXPECT_EQ(book.ask_level_count(), 0);
+  EXPECT_EQ(book.bid_level_count(), 0);
 }
