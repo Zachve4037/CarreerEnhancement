@@ -148,6 +148,10 @@ public:
   }
 
   [[nodiscard]] std::vector<ExecutionEvent> process_order(Order incoming) {
+    if (!is_valid_order(incoming)) {
+      return {};
+    }
+
     auto executions = match_order(incoming);
 
     if (incoming.remaining_quantity() == 0) {
@@ -187,7 +191,7 @@ public:
     return executions;
   }
 
-  [[nodiscard]] bool cancell_order(OrderId id) {
+  [[nodiscard]] bool cancel_order(OrderId id) {
     auto index_it = order_index_.find(id);
     if (index_it == order_index_.end()) {
       return false;
@@ -201,7 +205,7 @@ public:
         return false;
       }
 
-      auto& level = level_it->second;
+      auto &level = level_it->second;
 
       level.total_quantity -= location.order_it->remaining_quantity();
       --level.order_count;
@@ -219,7 +223,7 @@ public:
         return false;
       }
 
-      auto& level = level_it->second;
+      auto &level = level_it->second;
 
       level.total_quantity -= location.order_it->remaining_quantity();
       --level.order_count;
@@ -232,6 +236,34 @@ public:
       }
     }
     return true;
+  }
+
+  [[nodiscard]] std::optional<std::vector<ExecutionEvent>>
+  replace_order(OrderId old_id, Order replacement) {
+    if (!contains_order(old_id)) {
+      return std::nullopt;
+    }
+
+    const NewOrder command{
+      replacement.id,
+      replacement.side,
+      replacement.price,
+      replacement.quantity
+    };
+
+    if (validate(command).has_value()) {
+      return std::nullopt;
+    }
+
+    if (contains_order(replacement.id)) {
+      return std::nullopt;
+    }
+
+    if (!cancel_order(old_id)) {
+      return std::nullopt;
+    }
+
+    return process_order(replacement);
   }
 
   /// Just a helper function for the tests
@@ -291,6 +323,12 @@ private:
         opposite_book.erase(level_it);
       }
     }
+  }
+
+  [[nodiscard]] bool is_valid_order(const Order &order) const {
+    return order.id != 0 && !order_index_.contains(order.id) &&
+           order.price > 0 && order.quantity > 0 &&
+           (order.side == Side::Buy || order.side == Side::Sell);
   }
 };
 

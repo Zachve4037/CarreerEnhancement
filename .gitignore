@@ -4,3 +4,11 @@
 /build-tsan/
 /matching-engine/build/
 /matching-engine/cmake-build-debug/
+/matching-engine/.idea/.gitignore
+/matching-engine/.idea/.name
+/matching-engine/.idea/discord.xml
+/matching-engine/.idea/editor.xml
+/matching-engine/.idea/matching-engine.iml
+/matching-engine/.idea/misc.xml
+/matching-engine/.idea/modules.xml
+/matching-engine/.idea/vcs.xml
