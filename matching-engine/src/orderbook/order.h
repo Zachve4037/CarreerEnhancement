@@ -3,10 +3,12 @@
 #include <cstdint>
 #include <optional>
 
+struct ExecutionEvent;
 using OrderId = std::uint64_t;
 using Price = std::int64_t;
 using Quantity = std::uint64_t;
 using Sequence = std::uint64_t;
+using RequestId = std::uint64_t;
 
 enum class Side { Buy, Sell };
 
@@ -59,10 +61,14 @@ struct NewOrder {
   Side side;
   Price price;
   Quantity quantity;
+
+  bool operator==(const NewOrder&) const = default;
 };
 
 struct CancelOrder {
   OrderId id;
+
+  bool operator==(const CancelOrder&) const = default;
 };
 
 enum class ValidationError {
