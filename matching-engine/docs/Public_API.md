@@ -29,6 +29,10 @@ There have to be exactly 5 tokens, when less -> *MissingArgument* / when more ->
  * repeated replacements return the cached result
  * reusing a request ID with different payload is rejected
  * rejected requests are cached, so retries remain consistent
+ * in-memory command history
+ * explicit command ordering
+ * rejection of out-of-order commands
+ * deterministic order-book and execution results for the tested scenarios
 
 ### Limitations
  * In-memory cache - Restarting the application loses the request history
