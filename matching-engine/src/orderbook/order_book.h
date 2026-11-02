@@ -188,10 +188,50 @@ public:
   }
 
   [[nodiscard]] bool cancell_order(OrderId id) {
-    if (!contains_order(id)) {
+    auto index_it = order_index_.find(id);
+    if (index_it == order_index_.end()) {
       return false;
     }
+    const OrderLocation location = index_it->second;
 
+    if (location.side == Side::Buy) {
+      auto level_it = bids_.find(location.price);
+
+      if (level_it == bids_.end()) {
+        return false;
+      }
+
+      auto& level = level_it->second;
+
+      level.total_quantity -= location.order_it->remaining_quantity();
+      --level.order_count;
+
+      level.orders.erase(location.order_it);
+      order_index_.erase(index_it);
+
+      if (level.orders.empty()) {
+        bids_.erase(level_it);
+      }
+    } else {
+      auto level_it = asks_.find(location.price);
+
+      if (level_it == asks_.end()) {
+        return false;
+      }
+
+      auto& level = level_it->second;
+
+      level.total_quantity -= location.order_it->remaining_quantity();
+      --level.order_count;
+
+      level.orders.erase(location.order_it);
+      order_index_.erase(index_it);
+
+      if (level.orders.empty()) {
+        asks_.erase(level_it);
+      }
+    }
+    return true;
   }
 
   /// Just a helper function for the tests

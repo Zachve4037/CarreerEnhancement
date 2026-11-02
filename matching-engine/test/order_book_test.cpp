@@ -126,3 +126,47 @@ TEST(OrderBook, Id_disappear_after_fill) {
     book.process_order(order2);
     EXPECT_FALSE(book.contains_order(101));
 }
+
+TEST(OrderBook, Cancel_an_existing_order) {
+  OrderBook book;
+  Order order1(101, Side::Buy, 100, 5, 1);
+  book.process_order(order1);
+  EXPECT_TRUE(book.cancell_order(101));
+}
+
+TEST(OrderBook, Cancel_nonexistent_order) {
+  OrderBook book;
+  EXPECT_FALSE(book.cancell_order(101));
+}
+
+TEST(OrderBook, Cancel_one_of_two_orders_at_same_price) {
+  OrderBook book;
+  Order order1(101, Side::Buy, 100, 5, 1);
+  Order order2(102, Side::Buy, 100, 5, 2);
+  book.process_order(order1);
+  book.process_order(order2);
+  EXPECT_TRUE(book.cancell_order(101));
+  EXPECT_TRUE(book.contains_order(102));
+  EXPECT_FALSE(book.contains_order(101));
+}
+
+TEST(OrderBook, Cancel_the_only_at_price_level) {
+  OrderBook book;
+  Order order1(101, Side::Buy, 100, 5, 1);
+  book.process_order(order1);
+  EXPECT_EQ(book.bid_level_count(), 1);
+  EXPECT_EQ(book.best_bid(), 100);
+  EXPECT_TRUE(book.cancell_order(101));
+  EXPECT_EQ(book.bid_level_count(), 0);
+  EXPECT_EQ(book.best_bid(), std::nullopt);
+}
+
+TEST(OrderBook, Cancel_updates_total_quantity) {
+  OrderBook book;
+
+  book.process_order(Order(101, Side::Buy, 100, 5, 1));
+  book.process_order(Order(102, Side::Buy, 100, 8, 2));
+  EXPECT_EQ(book.bid_level(100)->total_quantity, 13);
+  EXPECT_TRUE(book.cancell_order(101));
+  EXPECT_EQ(book.bid_level(100)->total_quantity, 8);
+}
