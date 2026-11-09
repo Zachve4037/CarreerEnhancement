@@ -12,6 +12,8 @@ add_executable(command_parser_test
         command_parser_test.cpp
         order_book_test.cpp
         request_processor_test.cpp
+        random_order_stream.h
+        replay_log_test.cpp
         ../src/orderbook/command_parser.cpp
 )
 

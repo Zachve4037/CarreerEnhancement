@@ -33,6 +33,7 @@ There have to be exactly 5 tokens, when less -> *MissingArgument* / when more ->
  * explicit command ordering
  * rejection of out-of-order commands
  * deterministic order-book and execution results for the tested scenarios
+ * recorder / replayer with seed and checksum validation
 
 ### Limitations
  * In-memory cache - Restarting the application loses the request history

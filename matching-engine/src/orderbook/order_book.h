@@ -33,6 +33,38 @@ struct OrderLocation {
   std::list<Order>::iterator order_it;
 };
 
+struct OrderSnapshot {
+  OrderId id;
+  Side side;
+  Price price;
+  Quantity quantity;
+  Quantity filled_quantity;
+  Sequence sequence;
+  OrderStatus status;
+
+  [[nodiscard]] Quantity remaining_quantity() const noexcept {
+    return quantity - filled_quantity;
+  }
+
+  bool operator==(const OrderSnapshot &) const = default;
+};
+
+struct PriceLevelSnapshot {
+  Side side;
+  Price price;
+  Quantity total_quantity;
+  std::vector<OrderSnapshot> orders;
+
+  bool operator==(const PriceLevelSnapshot &) const = default;
+};
+
+struct OrderBookSnapshot {
+  std::vector<PriceLevelSnapshot> bids;
+  std::vector<PriceLevelSnapshot> asks;
+
+  bool operator==(const OrderBookSnapshot &) const = default;
+};
+
 class OrderBook {
 public:
   [[nodiscard]] bool add_order(Side side, Price price, Quantity quantity) {
@@ -271,10 +303,49 @@ public:
     return order_index_.contains(id);
   }
 
+  [[nodiscard]] OrderBookSnapshot snapshot() const {
+    OrderBookSnapshot result;
+    result.bids.reserve(bids_.size());
+    result.asks.reserve(asks_.size());
+
+    append_snapshot_side(bids_, Side::Buy, result.bids);
+    append_snapshot_side(asks_, Side::Sell, result.asks);
+
+    return result;
+  }
+
 private:
   std::map<Price, PriceLevel, std::greater<Price>> bids_;
   std::map<Price, PriceLevel, std::less<Price>> asks_;
   std::unordered_map<OrderId, OrderLocation> order_index_;
+
+  template <typename Book>
+static void append_snapshot_side(
+    const Book &book,
+    Side side,
+    std::vector<PriceLevelSnapshot> &out) {
+
+    for (const auto &[price, level] : book) {
+      PriceLevelSnapshot level_snapshot;
+      level_snapshot.side = side;
+      level_snapshot.price = price;
+      level_snapshot.total_quantity = level.total_quantity;
+      level_snapshot.orders.reserve(level.orders.size());
+
+      for (const auto &order : level.orders) {
+        level_snapshot.orders.push_back(OrderSnapshot{
+            order.id,
+            order.side,
+            order.price,
+            order.quantity,
+            order.filled_quantity,
+            order.sequence,
+            order.status});
+      }
+
+      out.push_back(std::move(level_snapshot));
+    }
+  }
 
   template <typename Book>
   void match_against(Order &incoming, Book &opposite_book,

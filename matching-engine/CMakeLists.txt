@@ -11,6 +11,7 @@ enable_testing()
 add_executable(matching_engine_demo
         src/main.cpp
         src/orderbook/command_parser.cpp
+        src/orderbook/replay_log.h
 )
 
 add_subdirectory(test)

@@ -145,6 +145,10 @@ public:
         return next_command_sequence_;
     }
 
+    [[nodiscard]] Sequence next_order_sequence() const noexcept {
+        return next_order_sequence_;
+    }
+
 private:
     struct CachedRequest {
         Sequence command_sequence;
