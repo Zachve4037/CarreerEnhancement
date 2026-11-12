@@ -22,17 +22,17 @@ using RequestId = std::uint64_t;
 using ClientRequest = std::variant<NewOrder, CancelOrder, ReplaceOrder>;
 
 enum class RequestError {
-    None,
-    InvalidRequestId,
-    DuplicateRequestIdWithDifferentPayload,
-    OutOfOrderCommand,
-    InvalidOrderId,
-    InvalidSide,
-    InvalidPrice,
-    InvalidQuantity,
-    DuplicateOrderId,
-    UnknownOrder,
-    ReplacementFailed
+    None = 0,
+    InvalidRequestId = 1,
+    DuplicateRequestIdWithDifferentPayload = 2,
+    OutOfOrderCommand = 3,
+    InvalidOrderId = 4,
+    InvalidSide = 5,
+    InvalidPrice = 6,
+    InvalidQuantity = 7,
+    DuplicateOrderId = 8,
+    UnknownOrder = 9,
+    ReplacementFailed = 10
 };
 
 struct RequestResult {

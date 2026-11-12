@@ -14,11 +14,12 @@ add_executable(command_parser_test
         request_processor_test.cpp
         random_order_stream.h
         replay_log_test.cpp
+        binary_protocol_test.cpp
         ../src/orderbook/command_parser.cpp
 )
 
 target_link_libraries(command_parser_test
-        PRIVATE GTest::gtest_main
+        PRIVATE GTest::gtest_main matching_engine_protocol
 )
 
 include(GoogleTest)

@@ -1,4 +1,6 @@
 # Public API DOC
+
+The binary command/result API is defined in [Binary_protocol.md](Binary_protocol.md).
 ## Commands
 * **NEW** - for creating new order
 * **BUY** - for changing order side to *BUY* side
